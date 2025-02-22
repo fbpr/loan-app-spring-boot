@@ -4,6 +4,7 @@ import com.enigmacamp.loan_app.entity.LoanType;
 import com.enigmacamp.loan_app.entity.LoanType;
 import com.enigmacamp.loan_app.model.request.LoanTypeRequest;
 import com.enigmacamp.loan_app.model.response.CommonResponse;
+import com.enigmacamp.loan_app.model.response.LoanResponse;
 import com.enigmacamp.loan_app.service.LoanTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,20 +20,19 @@ public class LoanTypeController {
     private final LoanTypeService loanTypeService;
     
     @PostMapping
-    public ResponseEntity<CommonResponse<LoanType>> createLoanType(@RequestBody LoanTypeRequest request) {
-        LoanType newType = loanTypeService.create(request);
-        CommonResponse<LoanType> response = CommonResponse.<LoanType>builder()
+    public ResponseEntity<CommonResponse<LoanResponse>> createLoanType(@RequestBody LoanTypeRequest request) {
+        LoanResponse newType = loanTypeService.create(request);
+        CommonResponse<LoanResponse> response = CommonResponse.<LoanResponse>builder()
                 .message("loan type created successfully")
                 .data(newType)
                 .build();
-
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CommonResponse<LoanType>> getLoanTypeById(@PathVariable String id) {
-        LoanType type = loanTypeService.getById(id);
-        CommonResponse<LoanType> response = CommonResponse.<LoanType>builder()
+    public ResponseEntity<CommonResponse<LoanResponse>> getLoanTypeById(@PathVariable String id) {
+        LoanResponse type = loanTypeService.getById(id);
+        CommonResponse<LoanResponse> response = CommonResponse.<LoanResponse>builder()
                 .message("loan type retrieved by id successfully")
                 .data(type)
                 .build();
@@ -41,10 +41,10 @@ public class LoanTypeController {
     }
 
     @GetMapping
-    public ResponseEntity<CommonResponse<List<LoanType>>> getAllLoanTypes() {
-        List<LoanType> types = loanTypeService.getAll();
-        CommonResponse<List<LoanType>> response =
-                CommonResponse.<List<LoanType>>builder()
+    public ResponseEntity<CommonResponse<List<LoanResponse>>> getAllLoanTypes() {
+        List<LoanResponse> types = loanTypeService.getAll();
+        CommonResponse<List<LoanResponse>> response =
+                CommonResponse.<List<LoanResponse>>builder()
                         .message("loan types retrieved successfully")
                         .data(types)
                         .build();
@@ -53,10 +53,10 @@ public class LoanTypeController {
     }
 
     @PutMapping
-    public ResponseEntity<CommonResponse<LoanType>> updateLoanType(@RequestBody LoanType type) {
-        LoanType updatedLoanType = loanTypeService.update(type);
-        CommonResponse<LoanType> response =
-                CommonResponse.<LoanType>builder()
+    public ResponseEntity<CommonResponse<LoanResponse>> updateLoanType(@RequestBody LoanType type) {
+        LoanResponse updatedLoanType = loanTypeService.update(type);
+        CommonResponse<LoanResponse> response =
+                CommonResponse.<LoanResponse>builder()
                         .message("loan type updated successfully")
                         .data(updatedLoanType)
                         .build();
@@ -65,9 +65,9 @@ public class LoanTypeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CommonResponse<LoanType>> deleteLoanType(@PathVariable String id) {
+    public ResponseEntity<CommonResponse<LoanResponse>> deleteLoanType(@PathVariable String id) {
         loanTypeService.delete(id);
-        CommonResponse<LoanType> response = CommonResponse.<LoanType>builder()
+        CommonResponse<LoanResponse> response = CommonResponse.<LoanResponse>builder()
                 .message("loan type deleted successfully")
                 .build();
 
