@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "trx_loan_transaction_detail")
+@Table(name = "trx_loan_detail")
 public class LoanTransactionDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

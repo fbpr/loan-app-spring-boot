@@ -14,7 +14,12 @@ public class LoanTransactionDetailServiceImpl implements LoanTransactionDetailSe
     private final LoanTransactionDetailRepository loanTransactionDetailRepository;
 
     @Override
-    public List<LoanTransactionDetail> createBulk(List<LoanTransactionDetail> loanTransactionDetails) {
-        return loanTransactionDetailRepository.saveAllAndFlush(loanTransactionDetails);
+    public void createBulk(List<LoanTransactionDetail> loanTransactionDetails) {
+        loanTransactionDetailRepository.saveAllAndFlush(loanTransactionDetails);
+    }
+
+    @Override
+    public void update(LoanTransactionDetail transactionDetail) {
+        loanTransactionDetailRepository.saveAndFlush(transactionDetail);
     }
 }

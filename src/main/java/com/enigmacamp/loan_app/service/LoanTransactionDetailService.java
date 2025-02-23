@@ -5,5 +5,6 @@ import com.enigmacamp.loan_app.entity.LoanTransactionDetail;
 import java.util.List;
 
 public interface LoanTransactionDetailService {
-    List<LoanTransactionDetail> createBulk(List<LoanTransactionDetail> transactionDetails);
+    void createBulk(List<LoanTransactionDetail> transactionDetails);
+    void update(LoanTransactionDetail transactionDetail);
 }
