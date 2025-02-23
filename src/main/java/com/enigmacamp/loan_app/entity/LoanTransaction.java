@@ -33,7 +33,7 @@ public class LoanTransaction {
     private String approvedBy;
     @Enumerated(EnumType.STRING)
     @Column(name = "approval_status")
-    private ApprovalStatus approvalStatus; // enum
+    private ApprovalStatus approvalStatus;
     @OneToMany
     @JoinColumn(name = "loan_transaction_id")
     private List<LoanTransactionDetail> loanTransactionDetails;
