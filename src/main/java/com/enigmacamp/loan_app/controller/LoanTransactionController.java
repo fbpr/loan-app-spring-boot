@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ public class LoanTransactionController {
     private final LoanTransactionService loanTransactionService;
 
     @PostMapping
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<CommonResponse<LoanTransactionResponse>> requestLoan(@RequestBody LoanTransactionRequest request) {
         LoanTransactionResponse newTransaction = loanTransactionService.create(request);
         CommonResponse<LoanTransactionResponse> response = CommonResponse.<LoanTransactionResponse>builder()
@@ -41,6 +43,7 @@ public class LoanTransactionController {
     }
 
     @PutMapping("/{adminId}/approve")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STAFF')")
     public ResponseEntity<CommonResponse<LoanTransactionResponse>> approveLoan(@PathVariable String adminId, @RequestBody LoanTransactionRequest request) {
         LoanTransactionResponse approvedTransaction = loanTransactionService.approve(adminId, request);
         CommonResponse<LoanTransactionResponse> response = CommonResponse.<LoanTransactionResponse>builder()

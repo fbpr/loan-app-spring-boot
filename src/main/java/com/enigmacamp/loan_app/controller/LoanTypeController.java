@@ -9,6 +9,7 @@ import com.enigmacamp.loan_app.service.LoanTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class LoanTypeController {
     private final LoanTypeService loanTypeService;
     
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN') and hasRole('STAFF')")
     public ResponseEntity<CommonResponse<LoanResponse>> createLoanType(@RequestBody LoanTypeRequest request) {
         LoanResponse newType = loanTypeService.create(request);
         CommonResponse<LoanResponse> response = CommonResponse.<LoanResponse>builder()
@@ -53,6 +55,7 @@ public class LoanTypeController {
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN') and hasRole('STAFF')")
     public ResponseEntity<CommonResponse<LoanResponse>> updateLoanType(@RequestBody LoanType type) {
         LoanResponse updatedLoanType = loanTypeService.update(type);
         CommonResponse<LoanResponse> response =
