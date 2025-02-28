@@ -16,19 +16,16 @@ public class JwtTokenProvider {
     @Value("${loan-app.expiration}")
     private Long EXPIRATION_TIME;
 
-    // mengekstrak username dari token JWT
     public String getUsernameFromToken(String token) {
         DecodedJWT decodedJWT = getDecodedJWT(token);
         return decodedJWT.getSubject();
     }
 
-    // validasi token JWT
     public boolean isValidToken(String token) {
         try {
             DecodedJWT decodedJWT = getDecodedJWT(token);
 
             return !decodedJWT.getExpiresAt().before(new Date());
-//              return decodedJWT.getExpiresAt().after(new Date());
         } catch (Exception e) {
             return false;
         }
@@ -37,13 +34,21 @@ public class JwtTokenProvider {
     public String getRoleFromToken(String token) {
         DecodedJWT decodedJWT = getDecodedJWT(token);
         String role = decodedJWT.getClaim("role").asString();
-
+        System.out.println(role);
         return role;
     }
 
-    public String generateToken(String username, List<String> role) {
+    public List<String> getRolesFromToken(String token) {
+        DecodedJWT decodedJWT = getDecodedJWT(token);
+        List<String> roles = decodedJWT.getClaim("role").asList(String.class);
+
+        return roles;
+    }
+
+
+    public String generateToken(String email, List<String> role) {
         String token = JWT.create()
-                .withSubject(username)
+                .withSubject(email)
                 .withClaim("role", role)
                 .withExpiresAt(new Date((System.currentTimeMillis() + EXPIRATION_TIME)))
                 .sign(Algorithm.HMAC512(SECRET_KEY));

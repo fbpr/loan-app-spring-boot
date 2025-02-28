@@ -23,7 +23,7 @@ public class AuthController {
 
     @PostMapping(ApiBash.SIGNUP)
     public ResponseEntity<CommonResponse<SignupResponse>> registerUser(@RequestBody AuthRequest request) {
-        SignupResponse newUser = authService.createAdmin(request);
+        SignupResponse newUser = authService.createUser(request);
         CommonResponse<SignupResponse> response = CommonResponse.<SignupResponse>builder()
                 .message("successfully created user")
                 .data(newUser)

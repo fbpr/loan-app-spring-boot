@@ -5,9 +5,7 @@ import com.enigmacamp.loan_app.model.response.AuthResponse;
 import com.enigmacamp.loan_app.model.response.SignupResponse;
 
 public interface AuthService {
-    SignupResponse createAdmin(AuthRequest request);
-    SignupResponse createStaff(AuthRequest request);
-    SignupResponse createCustomer(AuthRequest request);
+    SignupResponse createUser(AuthRequest request);
     AuthResponse login (AuthRequest request);
 //    LogoutResponse logout(HttpServletRequest request);
 }

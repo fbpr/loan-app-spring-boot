@@ -31,6 +31,9 @@ public class AppUser implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private Customer customer;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(userRole -> new SimpleGrantedAuthority(userRole.getRole().name())).toList();

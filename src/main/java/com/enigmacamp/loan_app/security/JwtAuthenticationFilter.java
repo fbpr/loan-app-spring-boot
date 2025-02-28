@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,13 +34,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
             if (jwtTokenProvider.isValidToken(token)) {
-                String username = jwtTokenProvider.getUsernameFromToken(token);
-                String role = jwtTokenProvider.getRoleFromToken(token);
+                String email = jwtTokenProvider.getUsernameFromToken(token);
 
-                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
-                // Menyimpan authentikasi
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
-                // untuk spring security mengenali user yang sudah login
+                List<String> role = jwtTokenProvider.getRolesFromToken(token);
+
+                List<GrantedAuthority> authorities = role.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
@@ -53,11 +54,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    // mengambil token JWT dari header authorization
     public String extractTokenFromRequest(HttpServletRequest request) {
         String header = request.getHeader("Authorization");
 
-        // Jika header ada dan dimulai dengan kata kata "Bearer ", maka ambil token setelah kata kata "bearer "
         if (header == null || !header.startsWith("Bearer ")) {
             return null;
         }
