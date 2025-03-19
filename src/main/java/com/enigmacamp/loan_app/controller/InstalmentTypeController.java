@@ -34,7 +34,7 @@ public class InstalmentTypeController {
     public ResponseEntity<CommonResponse<InstalmentType>> getInstalmentTypeById(@PathVariable String id) {
         InstalmentType type = instalmentTypeService.getById(id);
         CommonResponse<InstalmentType> response = CommonResponse.<InstalmentType>builder()
-                .message("installment type retrieved by id successfully")
+                .message("instalment type retrieved by id successfully")
                 .data(type)
                 .build();
 
@@ -46,7 +46,7 @@ public class InstalmentTypeController {
         List<InstalmentType> types = instalmentTypeService.getAll();
         CommonResponse<List<InstalmentType>> response =
                 CommonResponse.<List<InstalmentType>>builder()
-                .message("installment types retrieved successfully")
+                .message("instalment types retrieved successfully")
                 .data(types)
                 .build();
 
@@ -59,7 +59,7 @@ public class InstalmentTypeController {
         InstalmentType updatedInstalmentType = instalmentTypeService.update(type);
         CommonResponse<InstalmentType> response =
                 CommonResponse.<InstalmentType>builder()
-                        .message("installment type updated successfully")
+                        .message("instalment type updated successfully")
                         .data(updatedInstalmentType)
                         .build();
 
@@ -70,7 +70,7 @@ public class InstalmentTypeController {
     public ResponseEntity<CommonResponse<InstalmentType>> deleteInstalmentType(@PathVariable String id) {
         instalmentTypeService.delete(id);
         CommonResponse<InstalmentType> response = CommonResponse.<InstalmentType>builder()
-                .message("installment type deleted successfully")
+                .message("instalment type deleted successfully")
                 .build();
 
         return ResponseEntity.ok(response);

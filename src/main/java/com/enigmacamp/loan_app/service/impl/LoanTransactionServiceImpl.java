@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -90,7 +91,7 @@ public class LoanTransactionServiceImpl implements LoanTransactionService {
         transaction.setUpdatedAt(Instant.now().toEpochMilli());
         loanTransactionRepository.saveAndFlush(transaction);
 
-        List<LoanTransactionDetail> trxDetails = transaction.getLoanTransactionDetails();
+        List<LoanTransactionDetail> trxDetails = new ArrayList<>(transaction.getLoanTransactionDetails());
 
         LoanTransactionDetail newTrxDetail = LoanTransactionDetail.builder()
                 .loanTransaction(transaction)
