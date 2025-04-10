@@ -1,28 +1,5 @@
 # Loan App - Java Spring Boot
 
-Sebuah bank ternama yang ada di Indonesia, membuka divisi baru yang nantinya
-akan dikerjakan oleh squad yang dipilih. Project untuk divisi tersebut adalah
-sebuah aplikasi peminjaman online. Aplikasi ini bertujuan untuk mempermudah user
-ketika melakukan peminjaman tanpa harus datang ke cabang bank tersebut.
-
-Squad yang dipilih terdiri dari beberapa bagian
-diantaranya developer backend/frontend, sqa dan project manager.
-
-Project manager telah menentukan fitur-fitur yang dibutuhkan
-dan harus dibuat oleh developer.
-Anda terpilih menjadi backend developer pada project tersebut dan
-diberikan waktu 1 hari untuk menyelesaikanya.
-
-Harapan SQA, dalam waktu 1 hari backend yang anda kerjakan dapat di test,
-sehingga deadline untuk project ini adalah hari ini pukul 17:00
-push di git dengan sub-group livecode dengan nama repo livecode-loan-app.
-
-Usahakan mengimplementasikan JWT dan Unit Testing.
-
-Tester akan melakukan test aplikasi anda secara manual, sehingga
-anda harus memastikan bahwa backend yang anda buat sesuai dengan
-fitur dan endpoint yang sudah ditentukan dibawah.
-
 ## Features
 
 ### Auth
